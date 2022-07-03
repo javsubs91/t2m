@@ -600,7 +600,7 @@ a.converted_item_options_toggle>span:after {
 .converted_item_option_part+.converted_item_option_part {
 	margin-left: 1em;
 }
-.converted_item_option_part:not(.converted_item_option_part_visible) {
+.converted_item_option_part:not(.converted_item_option_part) {
 	display: none;
 }
 .converted_item_option_checkbox {
@@ -617,3 +617,4 @@ a.converted_item_options_toggle>span:after {
 .non_exclusive.exclusive_enabled {
 	display: none;
 }
+
