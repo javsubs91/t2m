@@ -428,7 +428,7 @@ var T2M = (function () {
 				if (this.options[2][1][1].checked) {
 					tracker_mode = true;
 					if (this.options[2][2][1].checked) {
-						tracker_mode = 1;
+						tracker_mode = 0;
 					}
 				}
 			}
