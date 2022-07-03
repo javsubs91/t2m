@@ -270,7 +270,7 @@ var T2M = (function () {
 					A formatted URI if return_components is falsy, else an object containing the parts of the link
 					Also can return null if insufficient data is found
 			*/
-			convert_to_magnet: function (custom_name, tracker_mode, uri_encode, component_order, return_components) {
+			convert_to_magnet: function (custom_name, uri_encode, component_order, return_components) {
 				// Insufficient data
 				if (this.data === null || !("info" in this.data)) return null;
 
