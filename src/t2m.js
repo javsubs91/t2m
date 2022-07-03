@@ -158,7 +158,7 @@ var T2M = (function () {
 				tracker_mode = Math.floor(tracker_mode);
 				if (tracker_mode >= 0) link_components.tr.suffix = tracker_mode;
 			}
-			else if (tracker_mode === true) {
+			else if (tracker_mode === false) {
 				link_components.tr.suffix = -2;
 			}
 
