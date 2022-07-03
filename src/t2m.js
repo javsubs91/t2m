@@ -1,7 +1,7 @@
 
 
 
-vavar T2M = (function () {
+var T2M = (function () {
 	"use strict";
 
 	// Module for encoding/decoding UTF8
@@ -10,7 +10,6 @@ vavar T2M = (function () {
 		return {
 			/**
 				Encode a string into UTF-8
-
 				@param str
 					The string to convert.
 					This string should be encoded in some way such that each character is in the range [0,255]
@@ -22,7 +21,6 @@ vavar T2M = (function () {
 			},
 			/**
 				Decode a string from UTF-8
-
 				@param str
 					A valid UTF-8 string
 				@return
@@ -121,14 +119,17 @@ vavar T2M = (function () {
 		/**
 			Convert URI components object into a magnet URI.
 			This is used to format the same object multiple times without rehashing anything.
-
 			@param link_components
 				An object returned from convert_to_magnet with return_components=true
 			@param custom_name
 				Can take one of the following values:
 					null/undefined: name will remain the same as it originally was
 					string: the custom name to give the magnet URI
-
+			@param tracker_mode
+				Can take one of the following values:
+					null/undefined/false/number < 0: single tracker only (primary one)
+					true: multiple trackers (without numbered suffix)
+					number >= 0: multiple trackers (with numbered suffix starting at the specified number)
 			@param uri_encode
 				Can take one of the following values:
 					null/undefined/true: encode components using encodeURIComponent
@@ -141,7 +142,7 @@ vavar T2M = (function () {
 			@return
 				A formatted URI
 		*/
-		Torrent.components_to_magnet = function (link_components, custom_name, uri_encode, component_order) {
+		Torrent.components_to_magnet = function (link_components, custom_name, tracker_mode, uri_encode, component_order) {
 			// Vars
 			var link, obj, list1, val, i, j;
 
@@ -158,7 +159,7 @@ vavar T2M = (function () {
 				tracker_mode = Math.floor(tracker_mode);
 				if (tracker_mode >= 0) link_components.tr.suffix = tracker_mode;
 			}
-			else if (tracker_mode === false) {
+			else if (tracker_mode === true) {
 				link_components.tr.suffix = -2;
 			}
 
@@ -244,7 +245,6 @@ vavar T2M = (function () {
 
 			/**
 				Convert the torrent data into a magnet link.
-
 				@param custom_name
 					Can take one of the following values:
 						null/undefined: no custom name will be generated, but if the name field is absent, it will be assumed from the original file's name
@@ -270,7 +270,7 @@ vavar T2M = (function () {
 					A formatted URI if return_components is falsy, else an object containing the parts of the link
 					Also can return null if insufficient data is found
 			*/
-			convert_to_magnet: function (custom_name, uri_encode, component_order, return_components) {
+			convert_to_magnet: function (custom_name, tracker_mode, uri_encode, component_order, return_components) {
 				// Insufficient data
 				if (this.data === null || !("info" in this.data)) return null;
 
@@ -329,7 +329,7 @@ vavar T2M = (function () {
 
 				// Convert
 				if (return_components) return link_components;
-				link = Torrent.components_to_magnet(link_components, null, uri_encode, component_order);
+				link = Torrent.components_to_magnet(link_components, null, tracker_mode, uri_encode, component_order);
 
 				// Done
 				return link;
@@ -426,9 +426,9 @@ vavar T2M = (function () {
 			if (this.options[2][0][1].checked) {
 				order.push("tr");
 				if (this.options[2][1][1].checked) {
-					tracker_mode = false;
+					tracker_mode = true;
 					if (this.options[2][2][1].checked) {
-						tracker_mode = 0;
+						tracker_mode = 1;
 					}
 				}
 			}
@@ -744,5 +744,3 @@ vavar T2M = (function () {
 	return functions;
 
 })();
-
-
