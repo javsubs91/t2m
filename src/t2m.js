@@ -329,7 +329,7 @@ var T2M = (function () {
 
 				// Convert
 				if (return_components) return link_components;
-				link = Torrent.components_to_magnet(link_components, null, tracker_mode, uri_encode, component_order);
+				link = Torrent.components_to_magnet(link_components, null, uri_encode, component_order);
 
 				// Done
 				return link;
