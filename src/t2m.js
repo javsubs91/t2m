@@ -1,7 +1,7 @@
 
 
 
-var T2M = (function () {
+vavar T2M = (function () {
 	"use strict";
 
 	// Module for encoding/decoding UTF8
@@ -141,7 +141,7 @@ var T2M = (function () {
 			@return
 				A formatted URI
 		*/
-		Torrent.components_to_magnet = function (link_components, custom_name, tracker_mode, uri_encode, component_order) {
+		Torrent.components_to_magnet = function (link_components, custom_name, uri_encode, component_order) {
 			// Vars
 			var link, obj, list1, val, i, j;
 
@@ -426,7 +426,7 @@ var T2M = (function () {
 			if (this.options[2][0][1].checked) {
 				order.push("tr");
 				if (this.options[2][1][1].checked) {
-					tracker_mode = true;
+					tracker_mode = false;
 					if (this.options[2][2][1].checked) {
 						tracker_mode = 0;
 					}
