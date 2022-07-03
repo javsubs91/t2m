@@ -128,11 +128,7 @@ var T2M = (function () {
 				Can take one of the following values:
 					null/undefined: name will remain the same as it originally was
 					string: the custom name to give the magnet URI
-			@param tracker_mode
-				Can take one of the following values:
-					null/undefined/false/number < 0: single tracker only (primary one)
-					true: multiple trackers (without numbered suffix)
-					number >= 0: multiple trackers (with numbered suffix starting at the specified number)
+
 			@param uri_encode
 				Can take one of the following values:
 					null/undefined/true: encode components using encodeURIComponent
